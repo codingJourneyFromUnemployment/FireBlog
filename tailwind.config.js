@@ -10,6 +10,7 @@ export default {
         extend: {
             colors: {
                 teal : '#1eb8b8',
+                char : '#303030',
             },
             fontFamily: {
                 'quicksand': ['Quicksand', 'sans-serif'],
