@@ -1,0 +1,23 @@
+{
+    "homeViewData": {
+        "welcomeScreen": {
+            "title": "Welcome!",
+            "blogPost":
+            "Weekly blog articles with all things programming including HTML, CSS, JavaScript and more. Register today to never miss a post!",
+            "welcomeScreen": false,
+            "photo": "coding"
+        },
+        "sampleBlogPost": [
+            {
+                "title": "How to create a website using HTML and CSS 1",
+                "blogHtml": "this is a test blog post title 1!",
+                "blogCoverPhoto": "designed-for-everyone"
+            },
+            {
+                "title": "How to create a website using HTML and CSS 2",
+                "blogHtml": "this is a test blog post title 2!",
+                "blogCoverPhoto": "beautiful-stories"
+            }
+        ]
+    }
+}
