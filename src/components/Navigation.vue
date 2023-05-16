@@ -16,10 +16,10 @@
         </nav>
         <transition name="mobile-nav">
             <ul v-if="mobileNav" class="mobile-nav flex flex-col fixed p-5 w-1/2 h-full max-w-md top-0 left-0 bg-char space-y-6">
-                <router-link class="link text-white py-2 pl-2 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">主页</router-link>
-                <router-link class="link text-white py-2 pl-2 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">笔记</router-link>
-                <router-link class="link text-white py-2 pl-2 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">创建笔记</router-link>
-                <router-link class="link text-white py-2 pl-2 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">登陆/注册</router-link>
+                <router-link class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">主页</router-link>
+                <router-link class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">笔记</router-link>
+                <router-link class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">创建笔记</router-link>
+                <router-link class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">登陆/注册</router-link>
             </ul>
         </transition>
     </header>
