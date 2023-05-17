@@ -2,10 +2,10 @@
     <div class="blog-card relative flex flex-col cursor-pointer rounded min-h-[420px] transiton-all duration-500 origin-bottom hover:-rotate-6 hover:scale-95 hover:shadow-md">
         <div class="icons absolute flex top-3 right-3 z-50">
             <div class="icon flex justify-center items-center w-9 h-auto rounded-full bg-white transition-all duration-500 hover:bg-char">
-                <Edit class="edit"/>
+                <Edit class="edit hover:text-white"/>
             </div>
             <div class="icon flex justify-center items-center w-9 h-auto rounded-full bg-white transition-all duration-500 hover:bg-char">
-                <Delete class="delete"/>
+                <Delete class="delete hover:text-white"/>
             </div>
         </div>
         <img :src="blogPostImgUrl" alt="">
@@ -48,9 +48,5 @@ export default {
 }
 </script>
 <style scoped>
-    .edit path,
-    .delete path{
-        fill: #fff;
-    }
-    
+
 </style>
