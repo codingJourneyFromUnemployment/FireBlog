@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+    mode: "jit",
     content: ["./src/**/*.{html,vue,js}"],
     theme: {
         screens: {
@@ -14,11 +15,14 @@ export default {
             },
             fontFamily: {
                 'quicksand': ['Quicksand', 'sans-serif'],
+            },
+            container: {
+                center: true,
+            },
+            flex: {
+                '4' : '4',
+            }
         },
-        container: {
-            center: true,
-        },
-    },
     plugins: [
         require('@tailwindcss/forms'),
     ],

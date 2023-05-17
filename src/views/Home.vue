@@ -1,7 +1,7 @@
 <template lang="">
     <div class="home">
         <BlogPost :post="homeViewData_Store.homeViewData.welcomeScreen" />
-        <BlogPost :post="post" v-for="(post, index) in homeViewData_Store.homeViewData.sampleBlogPost" :key="index" />
+        <BlogPost :post="post" v-for="(post, index) in homeViewData_Store.homeViewData.sampleBlogPost" :key="index" :blogIndex="index" />
     </div>
 </template>
 <script>
@@ -21,7 +21,6 @@ export default {
     },
     async created() {
         await this.homeViewData_Store.getHomeViewData();
-        console.log(this.homeViewData_Store.homeViewData);
         }       
     }
 

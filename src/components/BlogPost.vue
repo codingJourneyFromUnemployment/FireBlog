@@ -1,32 +1,31 @@
 <template lang="">
-    <div class="blog-wrapper">
-        <h2>
-            hello
-        </h2>
-        <!-- <div class="blog-content">
-            <h2>
-                {{ homeViewData_Store.homeViewData.welcomeScreen.title }}
-            </h2>
-            <p>
-                {{ homeViewData_Store.homeViewData.welcomeScreen.blogPost }}
-            </p>
-            <router-link class="link link-light" to="#">
-                登陆/注册<ArrowRightLight class="arrow arrow-light" />
-            </router-link>
-            <template v-for="post in homeViewData_Store.homeViewData.sampleBlogPost">
-                <h2>{{ post.title }}</h2>
-                <p class="content-preview">
+    <div class="blog-wrapper flex flex-col shadow-md md:flex-row md:min-h-[650px] md:max-w-2xl">
+        <div class="blog-content flex flex-col justify-center items-center flex-4 order-2 md:order-1 ">
+            <div class="max-w-sm py-16 px-6 md:py-0">
+                <h2 v-if="post.welcomeScreen" class="text-4xl font-light uppercase mb-6 md:min-w-[700px] md:text-5xl">
+                    {{ post.title }}
+                </h2>
+                <h2 v-else class="text-4xl font-light uppercase mb-6 md:min-w-[700px] md:text-5xl">
+                    {{ post.title }}
+                </h2>
+                <p v-if="post.welcomeScreen" class="text-2xl font-light leading-7">
+                    {{ post.blogPost }}
+                </p>
+                <p v-else class="content-preview text-2xl max-h-6 w-64 font-light leading-7 whitespace-nowrap overflow-hidden text-ellipsis">
                     {{ post.blogHtml }}
                 </p>
-                <router-link class="link link-light" to="#">
+                <router-link class="link link-light inline-flex items-center mt-8 pb-1 border-solid hover:bg-char hover:border-transparent transition-all duration-500" v-if="post.welcomeScreen" to="#">
+                    登陆/注册<ArrowRightLight class="arrow arrow-light" />
+                </router-link>
+                <router-link v-else to="#" class="link link-light inline-flex items-center mt-8 pb-1 border-solid hover:bg-char hover:border-transparent transition-all duration-500">
                     查看详情<ArrowRightLight class="arrow arrow-light" />
                 </router-link>
-            </template>
+            </div>
         </div>
         <div class="blog-photo">
-            <img :src="welcomeScreenImgUrl" alt="welcome screen">
-            <img v-for="blogPostImgUrl in blogPostImgUrls" :key="blogPostImgUrl" :src="blogPostImgUrl" alt="blog post">
-        </div> -->
+            <img v-if="post.welcomeScreen" :src="welcomeScreenImgUrl" alt="welcome screen">
+            <img v-else :src="blogPostImgUrl" alt="blog post">
+        </div>
     </div>
 </template>
 
@@ -36,6 +35,7 @@ import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
 
 export default {
     name: 'BlogPost',
+    props: ["post", "blogIndex"],
     components: {
         ArrowRightLight
     },
@@ -44,15 +44,15 @@ export default {
         return {
             homeViewData_Store,
             welcomeScreenImgUrl: "",
-            blogPostImgUrls: []
+            blogPostImgUrl: ""
         }
     },
-    async created() {
+    async mounted() {
         await this.homeViewData_Store.getHomeViewData();
         this.welcomeScreenImgUrl = `/assets/blogPhotos/${this.homeViewData_Store.homeViewData.welcomeScreen.photo}.jpg`;
-        this.homeViewData_Store.homeViewData.sampleBlogPost.forEach( post => {
-            this.blogPostImgUrls.push(`/assets/blogPhotos/${post.blogCoverPhoto}.jpg`);
-        });
+        if (this.blogIndex !== undefined) {
+            this.blogPostImgUrl = `/assets/blogPhotos/${this.homeViewData_Store.homeViewData.sampleBlogPost[this.blogIndex].blogCoverPhoto}.jpg`;
+        }
     },
 }
 </script>
