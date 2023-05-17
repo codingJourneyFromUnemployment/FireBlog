@@ -1,6 +1,9 @@
 <template lang="">
     <div class="blog-wrapper">
-        <div class="blog-content">
+        <h2>
+            hello
+        </h2>
+        <!-- <div class="blog-content">
             <h2>
                 {{ homeViewData_Store.homeViewData.welcomeScreen.title }}
             </h2>
@@ -21,11 +24,9 @@
             </template>
         </div>
         <div class="blog-photo">
-            <img :src="welcomeScreenImgUrl" alt="">
-            <template v-for="imgUrl in blogPostImgUrls">
-                <img :src="imgUrl" alt="">
-            </template>
-        </div>
+            <img :src="welcomeScreenImgUrl" alt="welcome screen">
+            <img v-for="blogPostImgUrl in blogPostImgUrls" :key="blogPostImgUrl" :src="blogPostImgUrl" alt="blog post">
+        </div> -->
     </div>
 </template>
 
@@ -48,9 +49,9 @@ export default {
     },
     async created() {
         await this.homeViewData_Store.getHomeViewData();
-        this.welcomeScreenImgUrl = `../assets/blogPhotos/${this.homeViewData_Store.homeViewData.welcomeScreen.photo}.jpg`;
+        this.welcomeScreenImgUrl = `/assets/blogPhotos/${this.homeViewData_Store.homeViewData.welcomeScreen.photo}.jpg`;
         this.homeViewData_Store.homeViewData.sampleBlogPost.forEach( post => {
-            this.blogPostImgUrls.push(`../assets/blogPhotos/${post.blogCoverPhoto}.jpg`);
+            this.blogPostImgUrls.push(`/assets/blogPhotos/${post.blogCoverPhoto}.jpg`);
         });
     },
 }

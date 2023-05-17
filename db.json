@@ -4,7 +4,7 @@
             "title": "Welcome!",
             "blogPost":
             "Weekly blog articles with all things programming including HTML, CSS, JavaScript and more. Register today to never miss a post!",
-            "welcomeScreen": false,
+            "welcomeScreen": true,
             "photo": "coding"
         },
         "sampleBlogPost": [

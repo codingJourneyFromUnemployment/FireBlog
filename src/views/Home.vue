@@ -1,9 +1,11 @@
 <template lang="">
-    <div>
-        <BlogPost />
+    <div class="home">
+        <BlogPost :post="homeViewData_Store.homeViewData.welcomeScreen" />
+        <BlogPost :post="post" v-for="(post, index) in homeViewData_Store.homeViewData.sampleBlogPost" :key="index" />
     </div>
 </template>
 <script>
+import {homeViewDataStore} from "../store/index.js";
 import BlogPost from "../components/BlogPost.vue";
 
 export default {
@@ -12,8 +14,17 @@ export default {
         BlogPost
     },
     data() {
+        const homeViewData_Store = homeViewDataStore();
+        return {
+            homeViewData_Store,
+        }
+    },
+    async created() {
+        await this.homeViewData_Store.getHomeViewData();
+        console.log(this.homeViewData_Store.homeViewData);
+        }       
     }
-}
+
 </script>
 <style lang="">
     
