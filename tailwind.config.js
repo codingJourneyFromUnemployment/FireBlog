@@ -5,7 +5,8 @@ export default {
     theme: {
         screens: {
             'sm': '480px',
-            'md': '768px','lg': '1024px',
+            'md': '768px',
+            'lg': '1024px',
             'xl': '1440px',
         },
         extend: {
@@ -20,7 +21,8 @@ export default {
                 center: true,
             },
             flex: {
-                '4' : '4',
+                '4' : '4 4 0%',
+                '3' : '3 3 0%',
             }
         },
     plugins: [

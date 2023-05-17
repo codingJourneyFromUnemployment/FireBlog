@@ -1,30 +1,26 @@
 <template lang="">
-    <div class="blog-wrapper flex flex-col shadow-md md:flex-row md:min-h-[650px] md:max-w-2xl">
-        <div class="blog-content flex flex-col justify-center items-center flex-4 order-2 md:order-1 ">
+    <div class="blog-wrapper flex flex-col shadow-md md:flex-row md:min-h-[650px] md:max-h-[650px]" :class="{ 'no-user': !user }">
+        <div class="blog-content flex flex-col justify-center items-center flex-4 order-2 md:order-1 lg:flex-3">
             <div class="max-w-sm py-16 px-6 md:py-0">
-                <h2 v-if="post.welcomeScreen" class="text-4xl font-light uppercase mb-6 md:min-w-[700px] md:text-5xl">
-                    {{ post.title }}
-                </h2>
-                <h2 v-else class="text-4xl font-light uppercase mb-6 md:min-w-[700px] md:text-5xl">
-                    {{ post.title }}
-                </h2>
+                <h2 v-if="post.welcomeScreen" class="text-4xl font-light uppercase mb-6 md:text-5xl">{{ post.title }}</h2>
+                <h2 v-else class="text-4xl font-light uppercase mb-6 md:text-5xl">{{ post.title }}</h2>
                 <p v-if="post.welcomeScreen" class="text-2xl font-light leading-7">
                     {{ post.blogPost }}
                 </p>
                 <p v-else class="content-preview text-2xl max-h-6 w-64 font-light leading-7 whitespace-nowrap overflow-hidden text-ellipsis">
                     {{ post.blogHtml }}
                 </p>
-                <router-link class="link link-light inline-flex items-center mt-8 pb-1 border-solid hover:bg-char hover:border-transparent transition-all duration-500" v-if="post.welcomeScreen" to="#">
-                    登陆/注册<ArrowRightLight class="arrow arrow-light" />
+                <router-link class="link link-light flex flex-row items-center mt-8 pb-1 hover:text-teal transition-all duration-500" v-if="post.welcomeScreen" to="#">
+                    登陆/注册<ArrowRightLight class="arrow arrow-light h-3 ml-2" />
                 </router-link>
-                <router-link v-else to="#" class="link link-light inline-flex items-center mt-8 pb-1 border-solid hover:bg-char hover:border-transparent transition-all duration-500">
-                    查看详情<ArrowRightLight class="arrow arrow-light" />
+                <router-link v-else to="#" class="link flex flex-row items-center mt-8 pb-1 hover:text-teal transition-all duration-500">
+                    查看详情<ArrowRightLight class="arrow arrow-light h-3 ml-2" />
                 </router-link>
             </div>
         </div>
-        <div class="blog-photo">
-            <img v-if="post.welcomeScreen" :src="welcomeScreenImgUrl" alt="welcome screen">
-            <img v-else :src="blogPostImgUrl" alt="blog post">
+        <div class="blog-photo order-1 flex flex-row flex-3 shadow-md md:order-2 lg:flex-4">
+            <img v-if="post.welcomeScreen" :src="welcomeScreenImgUrl" alt="welcome screen" class="block w-full h-full object-cover">
+            <img v-else :src="blogPostImgUrl" alt="blog post" class="block w-full h-full object-cover">
         </div>
     </div>
 </template>
@@ -56,6 +52,17 @@ export default {
     },
 }
 </script>
-<style lang="">
-    
+<style scoped>
+.blog-wrapper:nth-child(even) .blog-content {
+    order: 2;
+}
+
+.blog-wrapper:nth-child(even) .blog-photo {
+    order: 1;
+}
+
+.no-user:first-child .blog-content {
+    background-color: #303030;
+    color: #fff;
+}   
 </style>

@@ -6,24 +6,24 @@
                     <router-link class="header text-center text-3xl text-white font-semibold md:text-left" :to="{name : 'Home'}">私人笔记</router-link>
                     <ul class="flex flex-row space-x-4">
                         <li class="flex items-center">
-                            <a href="#"><youTube class="svg-icon w-6 h-auto text-white" /></a>
+                            <a href="#"><youTube class="svg-icon w-6 h-auto text-white hover:text-teal transition-all duration-500" /></a>
                         </li>
                         <li class="flex items-center">
-                            <a href="#"><twitter class="svg-icon w-6 h-auto text-white" /></a>
+                            <a href="#"><twitter class="svg-icon w-6 h-auto text-white hover:text-teal transition-all duration-500" /></a>
                         </li>
                         <li class="flex items-center">
-                            <a href="#"><instagram class="svg-icon w-6 h-auto text-white" /></a>
+                            <a href="#"><instagram class="svg-icon w-6 h-auto text-white hover:text-teal transition-all duration-500" /></a>
                         </li>
                         <li class="flex items-center">
-                            <a href="#"><linkedin class="svg-icon w-6 h-auto text-white" /></a>
+                            <a href="#"><linkedin class="svg-icon w-6 h-auto text-white hover:text-teal transition-all duration-500" /></a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-2 flex flex-1 flex-col justify-center items-center md:flex-row md:justify-start md:items-center">
                     <ul class="flex flex-row h-full space-x-4 md:flex-col items-start md:space-y-4 md:space-x-0">
-                        <router-link class="link text-2xl font-medium text-white" :to="{name : 'Home'}">主页</router-link>
-                        <router-link class="link text-2xl font-medium text-white" :to="{name : 'Blogs'}">笔记</router-link>
-                        <router-link class="link text-2xl font-medium text-white" :to="{name : 'Login'}">登录/注册</router-link>
+                        <router-link class="link text-2xl font-medium text-white hover:text-teal transition-all duration-500" :to="{name : 'Home'}">主页</router-link>
+                        <router-link class="link text-2xl font-medium text-white hover:text-teal transition-all duration-500" :to="{name : 'Blogs'}">笔记</router-link>
+                        <router-link class="link text-2xl font-medium text-white hover:text-teal transition-all duration-500" :to="{name : 'Login'}">登录/注册</router-link>
                     </ul>
                 </div>
             </div>
