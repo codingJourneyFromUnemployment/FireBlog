@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="blog-card">
+    <div class="blog-card relative flex flex-col cursor-pointer rounded min-h-[420px] transiton-all duration-500 hover:origin-bottom hover:shadow-md">
         <div class="icons">
             <div class="icon">
                 <Edit class="icon"/>
