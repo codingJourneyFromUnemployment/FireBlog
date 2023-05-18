@@ -9,7 +9,7 @@ const Routes = [
   {path: "/", name: "Home", component: Home},
   {path: "/blogs", name: "Blogs", component: Blogs},
   {path: "/newpost", name: "Newpost", component: Newpost},
-  {path: "/Login", name: "Login", component: Login},
+  {path: "/login", name: "Login", component: Login},
   {path: "/temp", name: "TempView", component: TempView}
 ]
 

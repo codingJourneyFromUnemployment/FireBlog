@@ -13,6 +13,7 @@ export default {
             colors: {
                 teal : '#1eb8b8',
                 char : '#303030',
+                char_rgba : 'rgba(48, 48, 48, 0.8)',
             },
             fontFamily: {
                 'quicksand': ['Quicksand', 'sans-serif'],
