@@ -21,4 +21,12 @@ const homeViewDataStore = defineStore({
     }
 })
 
-export { homeViewDataStore }
+const blogsViewDataStore = defineStore({
+    id: 'blogsViewDataStore',
+    state: () => ({
+        editPost: false,
+    })
+})
+
+
+export { homeViewDataStore, blogsViewDataStore }
