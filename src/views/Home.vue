@@ -43,7 +43,6 @@ export default {
     },
     async created() {
         await this.homeViewData_Store.getHomeViewData();
-        console.log(this.blogsViewData_Store.editPost);
         },
     }       
 

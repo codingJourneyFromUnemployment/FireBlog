@@ -8,8 +8,8 @@
                 <ul class="mr-9 space-x-4">
                     <router-link class="link font-medium text-2xl py-2 px-4 rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/">主页</router-link>
                     <router-link class="link font-medium text-2xl py-2 px-4  rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/blogs">笔记</router-link>
-                    <router-link class="link font-medium text-2xl py-2 px-4  rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="#">创建笔记</router-link>
-                    <router-link class="link font-medium text-2xl py-2 px-4 rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="#">登录/注册</router-link>
+                    <router-link class="link font-medium text-2xl py-2 px-4  rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/newpost">创建笔记</router-link>
+                    <router-link class="link font-medium text-2xl py-2 px-4 rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/login">登录/注册</router-link>
                 </ul>
             </div>
             <menuIcon @click="toggleMobileNav" class="cursor-pointer absolute top-8 right-6 h-6 md:hidden" />

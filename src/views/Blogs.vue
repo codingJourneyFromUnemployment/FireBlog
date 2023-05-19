@@ -33,7 +33,6 @@ export default {
         },
     beforeUnmount() {
         this.blogsViewData_Store.editPost = false;
-        console.log(this.blogsViewData_Store.editPost);
     },  
     }
 </script>

@@ -7,6 +7,8 @@ const homeViewDataStore = defineStore({
         homeViewData: {
             welcomeScreen: {},
             blogPosts: [],
+            navigationShow: true,
+            footerShow: true,
         }
     }),
     actions: {
@@ -28,5 +30,15 @@ const blogsViewDataStore = defineStore({
     })
 })
 
+const userDataStore = defineStore({
+    id: 'userDataStore',
+    state: () => ({
+        user: {
+            password: '',
+            email: '',
+            login: false
+        }
+    })
+})
 
-export { homeViewDataStore, blogsViewDataStore }
+export { homeViewDataStore, blogsViewDataStore, userDataStore }
