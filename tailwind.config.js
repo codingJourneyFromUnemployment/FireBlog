@@ -26,9 +26,6 @@ export default {
                 '3' : '3 3 0%',
             },
             borderColor:['focus', 'focus-visible'],
-        },
-    plugins: [
-        require('@tailwindcss/forms'),
-    ],
+        }
 }
 }

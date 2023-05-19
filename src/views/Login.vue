@@ -10,11 +10,11 @@
             <div class="inputs w-full max-w-sm">
                 <div class="input flex flex-row justify-center items-center mb-6 space-x-4">
                     <envelop class="icon w-5" />
-                    <input type="email" placeholder="Email" v-model="email" class="w-full rounded-lg shadow-md h-8">
+                    <input type="email" placeholder="Email" v-model="email" class="">
                 </div>
                 <div class="input flex flex-row justify-center items-center mb-6 space-x-4">
                     <lock_alt class="icon w-5" />
-                    <input type="password" placeholder="Password" v-model="password" class="w-full rounded-lg shadow-md h-8">
+                    <input type="password" placeholder="Password" v-model="password" class="">
                 </div>
             </div>
             <router-link class="forget-password" :to="{name : ForgotPassword}">
@@ -48,13 +48,15 @@ export default {
 </script>
 <style scoped>
 input {
+    width:100%;
+    height: 30px;
     border: 1px;
     border-color: rgb(200, 200, 200);
-    transition: all 0.5s ease;
+    border-radius: 5px;
+}
+input:focus {
+    outline: none;
 }
 
-input :focus {
-    border-color: #1eb8b8;
-}
     
 </style>
