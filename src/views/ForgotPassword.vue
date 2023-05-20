@@ -1,5 +1,6 @@
 <template lang="">
     <Modal v-show="modalData_Store.modalShow" />
+    <loading v-show="modalData_Store.loadingShow" />
     <div class="form-wrap overflow-hidden flex flex-row h-screen justify-center self-center my-0 mx-auto w-11/12 lg:w-full ">
         <form class="login py-0 px-3 relative flex flex-col justify-center items-center flex-1 lg:px-12" action="">
             <h2 class="text-center text-3xl text-char mb-6 lg:text-4xl">重置密码</h2>
@@ -23,6 +24,7 @@
 </template>
 <script>
 import Modal from '../components/Modal.vue';
+import loading from '../components/Loading.vue';
 import envelop from '../assets/Icons/envelope-regular.svg?component'
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
 import {userDataStore, modalDataStore} from "../store/index.js";
@@ -32,7 +34,8 @@ export default {
     components: {
         envelop,
         ArrowRightLight,
-        Modal
+        Modal,
+        loading
     },
     data () {
         const userData_Store = userDataStore();
@@ -45,6 +48,7 @@ export default {
     },
     created() {
         this.modalData_Store.modalShow = false;
+        this.modalData_Store.loadingShow = false;
     },
 }
 </script>
