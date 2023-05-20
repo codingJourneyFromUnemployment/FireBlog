@@ -37,6 +37,7 @@ import lock_alt from '../assets/Icons/lock-alt-solid.svg?component'
 import user_alt from '../assets/Icons/user-alt-light.svg?component'
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
 import {userDataStore} from "../store/index.js";
+import axios from 'axios';
 
 export default {
     name: 'Login',
@@ -50,8 +51,28 @@ export default {
         const userData_Store = userDataStore();
         return {
             userData_Store,
+            userName: '',
             email: '',
             password: '',
+        }
+    },
+    methods: {
+        async register() {
+            const {userName, email, password} = this;
+            if (!userName || !email || !password) {
+                return {
+                    //抛出错误    
+                }
+            }
+            const {data} = await axios.post('/api/register', {
+                userName,
+                email,
+                password,
+            });
+            if (data.code === 200) {
+                this.userData_Store.setUserData(data.data);
+                this.$router.push({name: 'Home'});
+            }
         }
     }
 }
