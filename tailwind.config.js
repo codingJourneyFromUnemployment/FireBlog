@@ -14,6 +14,7 @@ export default {
                 teal : '#1eb8b8',
                 char : '#303030',
                 char_rgba : 'rgba(48, 48, 48, 0.8)',
+                modal_bg : 'rgba(0, 0, 0, 0.7)',
             },
             fontFamily: {
                 'quicksand': ['Quicksand', 'sans-serif'],
@@ -22,10 +23,18 @@ export default {
                 center: true,
             },
             flex: {
+                '1' : '1 1 0%',
+                '2' : '2 2 0%',
                 '4' : '4 4 0%',
                 '3' : '3 3 0%',
             },
             borderColor:['focus', 'focus-visible'],
+            display: {
+                'initial': 'initial',
+            }
         }
-}
+    },
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
 }

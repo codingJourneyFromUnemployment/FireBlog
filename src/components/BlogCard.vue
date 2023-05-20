@@ -1,6 +1,6 @@
 <template lang="">
     <div class="blog-card relative bg-white flex flex-col cursor-pointer rounded min-h-[420px] transiton-all duration-500 origin-bottom hover:-rotate-6 hover:scale-95 hover:shadow-md">
-        <div v-if="blogsViewData_Store.editPost" class="icons absolute flex top-3 right-3 z-50">
+        <div v-if="blogsViewData_Store.editPost" class="icons absolute flex top-3 right-3 z-40">
             <div class="icon flex justify-center items-center w-9 h-9 rounded-full bg-white border border-gray-300 transition-all duration-500 hover:bg-char hover:text-white">
                 <Edit class="edit h-4 w-auto pointer-events-none"/>
             </div>

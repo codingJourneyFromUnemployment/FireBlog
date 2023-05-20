@@ -1,5 +1,5 @@
 <template lang="">
-    <header class="bg-white py-0 px-6 shadow-md z-50">
+    <header class="bg-white py-0 px-6 shadow-md z-40">
         <nav class="relative flex container py-6 px-0">
             <div class="branding flex items-center">
                 <router-link class="header font-bold text-4xl text-black" :to="{name : 'Home'}">私人笔记</router-link>

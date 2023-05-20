@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     checkRoute() {
-      if (this.$route.path === '/login' || this.$route.path === '/register' || this.$route.path === '/forgot-password') {
+      if (this.$route.path === '/login' || this.$route.path === '/register' || this.$route.path === '/forgotpassword') {
         this.homeViewData_Store.navigationShow = false;
         this.homeViewData_Store.footerShow = false;
       } else {

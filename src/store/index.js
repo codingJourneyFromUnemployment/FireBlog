@@ -41,4 +41,12 @@ const userDataStore = defineStore({
     })
 })
 
-export { homeViewDataStore, blogsViewDataStore, userDataStore }
+const modalDataStore = defineStore({
+    id: 'modalDataStore',
+    state: () => ({
+        message: '',
+        modalShow: false,
+    }),
+})
+
+export { homeViewDataStore, blogsViewDataStore, userDataStore, modalDataStore }
