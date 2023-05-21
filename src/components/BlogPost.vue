@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {homeViewDataStore} from "../store/index.js";
+import {postViewDataStore} from "../store/index.js";
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
 
 export default {
@@ -36,18 +36,18 @@ export default {
         ArrowRightLight
     },
     data() {
-        const homeViewData_Store = homeViewDataStore();
+        const postViewData_Store = postViewDataStore();
         return {
-            homeViewData_Store,
+            postViewData_Store,
             welcomeScreenImgUrl: "",
             blogPostImgUrl: ""
         }
     },
     async mounted() {
-        await this.homeViewData_Store.getHomeViewData();
-        this.welcomeScreenImgUrl = `/assets/blogPhotos/${this.homeViewData_Store.homeViewData.welcomeScreen.photo}.jpg`;
+        await this.postViewData_Store.getpostViewData();
+        this.welcomeScreenImgUrl = `/assets/blogPhotos/${this.postViewData_Store.postViewData.welcomeScreen.photo}.jpg`;
         if (this.blogIndex !== undefined) {
-            this.blogPostImgUrl = `/assets/blogPhotos/${this.homeViewData_Store.homeViewData.sampleBlogPost[this.blogIndex].blogCoverPhoto}.jpg`;
+            this.blogPostImgUrl = `/assets/blogPhotos/${this.postViewData_Store.postViewData.sampleBlogPost[this.blogIndex].blogCoverPhoto}.jpg`;
         }
     },
 }

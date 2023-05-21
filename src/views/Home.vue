@@ -1,12 +1,12 @@
 <template lang="">
     <div class="home">
-        <BlogPost :post="homeViewData_Store.homeViewData.welcomeScreen" />
-        <BlogPost :post="post" v-for="(post, index) in homeViewData_Store.homeViewData.sampleBlogPost" :key="index" :blogIndex="index" />
+        <BlogPost :post="postViewData_Store.postViewData.welcomeScreen" />
+        <BlogPost :post="post" v-for="(post, index) in postViewData_Store.postViewData.sampleBlogPost" :key="index" :blogIndex="index" />
         <div class="blog-card-warp relative py-20 px-4 md:py-24 bg-slate-100">
             <div class="container">
                 <h3 class="font-light text-4xl mb-8">查看更多近期笔记</h3>
                 <div class="blog-cards grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    <BlogCard :post="post" v-for="(post, index) in homeViewData_Store.homeViewData.sampleBlogCards" :key="index" :sampleIndex="index"/>
+                    <BlogCard :post="post" v-for="(post, index) in postViewData_Store.postViewData.sampleBlogCards" :key="index" :sampleIndex="index"/>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
     </div>
 </template>
 <script>
-import {homeViewDataStore, blogsViewDataStore} from "../store/index.js";
+import {postViewDataStore, blogsViewDataStore} from "../store/index.js";
 import BlogPost from "../components/BlogPost.vue";
 import BlogCard from "../components/BlogCard.vue";
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
@@ -34,15 +34,15 @@ export default {
         ArrowRightLight
     },
     data() {
-        const homeViewData_Store = homeViewDataStore();
+        const postViewData_Store = postViewDataStore();
         const blogsViewData_Store = blogsViewDataStore();
         return {
-            homeViewData_Store,
+            postViewData_Store,
             blogsViewData_Store,
         }
     },
     async created() {
-        await this.homeViewData_Store.getHomeViewData();
+        await this.postViewData_Store.getpostViewData();
         },
     }       
 

@@ -19,7 +19,7 @@
     </div>
 </template>
 <script>
-import {homeViewDataStore, blogsViewDataStore} from "../store/index.js";
+import {postViewDataStore, blogsViewDataStore} from "../store/index.js";
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
 import Edit from '../assets/Icons/edit-regular.svg?component';
 import Delete from '../assets/Icons/trash-regular.svg?component';
@@ -32,19 +32,19 @@ export default {
         Delete
     },
     data() {
-        const homeViewData_Store = homeViewDataStore();
+        const postViewData_Store = postViewDataStore();
         const blogsViewData_Store = blogsViewDataStore();
         return {
-            homeViewData_Store,
+            postViewData_Store,
             blogsViewData_Store,
             blogPostImgUrl: ""
         }
     },
     props: ["post", "sampleIndex"],
     async mounted() {
-        await this.homeViewData_Store.getHomeViewData();
+        await this.postViewData_Store.getpostViewData();
         if (this.sampleIndex !== undefined) {
-            this.blogPostImgUrl = `/assets/blogCards/${this.homeViewData_Store.homeViewData.sampleBlogCards[this.sampleIndex].blogCoverPhoto}.jpg`;
+            this.blogPostImgUrl = `/assets/blogCards/${this.postViewData_Store.postViewData.sampleBlogCards[this.sampleIndex].blogCoverPhoto}.jpg`;
         }
     },
 }

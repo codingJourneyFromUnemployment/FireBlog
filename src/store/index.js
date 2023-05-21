@@ -1,10 +1,10 @@
 import {defineStore} from 'pinia'
 import axios from 'axios'
 
-const homeViewDataStore = defineStore({
-    id: 'homeViewDataStore',
+const postViewDataStore = defineStore({
+    id: 'postViewDataStore',
     state: () => ({
-        homeViewData: {
+        postViewData: {
             welcomeScreen: {},
             blogPosts: [],
             navigationShow: true,
@@ -12,10 +12,10 @@ const homeViewDataStore = defineStore({
         }
     }),
     actions: {
-        async getHomeViewData() {
+        async getpostViewData() {
             try {
-                const res = await axios.get('http://localhost:5000/homeViewData')
-                this.homeViewData = res.data
+                const res = await axios.get('http://localhost:5173/api/postViewData')
+                this.postViewData = res.data
             } catch (err) {
                 console.log(err)
             }
@@ -33,14 +33,69 @@ const blogsViewDataStore = defineStore({
 const userDataStore = defineStore({
     id: 'userDataStore',
     state: () => ({
-        user: {
-            username: '',
-            password: '',
-            email: '',
-            login: false
-        }
+        userData:{
+            id: '',
+            userInfo: {
+                username: '',
+                password: '',
+                email: ''
+            },
+            userStatus: {
+                loggedIn: false,
+                registered: false,
+                admin: false
+            }
+        },
+        allUsers: [],
     }),
-})
+    actions: {
+        userDataStoreInit () {
+            this.userData = {
+                id: '',
+                userInfo: {
+                    username: '',
+                    password: '',
+                    email: ''
+                },
+                userStatus: {
+                    loggedIn: false,
+                    registered: false,
+                    admin: false
+                }
+            }
+        },
+        async register () {
+            try {
+                await axios.post('http://localhost:5173/api/userData', this.userData)
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async getallUsers () {
+            try {
+                const res = await axios.get('http://localhost:5173/api/userData')
+                this.allUsers = res.data
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async login () {
+            await this.getallUsers()
+            console.log(this.allUsers)
+            console.log(this.userData.userInfo.email)
+            const user = this.allUsers.find(user => this.userData.userInfo.email === user.userInfo.email)
+            if (!user) {
+                throw new Error('这个邮箱尚未注册')
+            } else if (this.userData.userInfo.password !== user.userInfo.password) { 
+                throw new Error('密码错误')
+            }
+            this.userData = user
+            this.userData.userStatus.loggedIn = true
+            this.userData.userStatus.registered = true
+            console.log(this.userData)
+        },
+        }
+})  
 
 const modalDataStore = defineStore({
     id: 'modalDataStore',
@@ -51,4 +106,4 @@ const modalDataStore = defineStore({
     }),
 })
 
-export { homeViewDataStore, blogsViewDataStore, userDataStore, modalDataStore }
+export { postViewDataStore, blogsViewDataStore, userDataStore, modalDataStore }

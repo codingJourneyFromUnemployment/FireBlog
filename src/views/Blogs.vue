@@ -6,13 +6,13 @@
                     <span class="mr-4">打开编辑功能</span>
                     <input type="checkbox" v-model="blogsViewData_Store.editPost">
                 </div>
-                <BlogCard :post="post" v-for="(post, index) in homeViewData_Store.homeViewData.sampleBlogCards" :key="index" :sampleIndex="index"/>
+                <BlogCard :post="post" v-for="(post, index) in postViewData_Store.postViewData.sampleBlogCards" :key="index" :sampleIndex="index"/>
             </div>
         </div>
     </div>
 </template>
 <script>
-import {homeViewDataStore, blogsViewDataStore} from "../store/index.js";
+import {postViewDataStore, blogsViewDataStore} from "../store/index.js";
 import BlogCard from "../components/BlogCard.vue";
 
 export default {
@@ -21,15 +21,15 @@ export default {
         BlogCard
     },
     data() {
-        const homeViewData_Store = homeViewDataStore();
+        const postViewData_Store = postViewDataStore();
         const blogsViewData_Store = blogsViewDataStore();
         return {
-            homeViewData_Store,
+            postViewData_Store,
             blogsViewData_Store,
         }
     },
     async created() {
-        await this.homeViewData_Store.getHomeViewData();
+        await this.postViewData_Store.getpostViewData();
         },
     beforeUnmount() {
         this.blogsViewData_Store.editPost = false;

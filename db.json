@@ -1,29 +1,86 @@
 {
-    "homeViewData": {
-        "welcomeScreen": {
-            "title": "Welcome!",
-            "blogPost":
-            "Weekly blog articles with all things programming including HTML, CSS, JavaScript and more. Register today to never miss a post!",
-            "welcomeScreen": true,
-            "photo": "coding"
-        },
-        "sampleBlogPost": [
-            {
-                "title": "How to create a website using HTML and CSS 1",
-                "blogHtml": "this is a test blog post title 1!",
-                "blogCoverPhoto": "designed-for-everyone"
-            },
-            {
-                "title": "How to create a website using HTML and CSS 2",
-                "blogHtml": "this is a test blog post title 2!",
-                "blogCoverPhoto": "beautiful-stories"
-            }
-        ],
-        "sampleBlogCards":[
-            { "blogTitle": "Blog Card #1", "blogCoverPhoto":"stock-1", "blogDate": "May 1, 2023"},
-            { "blogTitle": "Blog Card #2", "blogCoverPhoto":"stock-2", "blogDate": "May 1, 2023"},
-            { "blogTitle": "Blog Card #3", "blogCoverPhoto":"stock-3", "blogDate": "May 1, 2023"},
-            { "blogTitle": "Blog Card #4", "blogCoverPhoto":"stock-4", "blogDate": "May 1, 2023"}
-        ]
+  "postViewData": {
+    "welcomeScreen": {
+      "title": "Welcome!",
+      "blogPost": "Weekly blog articles with all things programming including HTML, CSS, JavaScript and more. Register today to never miss a post!",
+      "welcomeScreen": true,
+      "photo": "coding"
+    },
+    "sampleBlogPost": [
+      {
+        "title": "How to create a website using HTML and CSS 1",
+        "blogHtml": "this is a test blog post title 1!",
+        "blogCoverPhoto": "designed-for-everyone"
+      },
+      {
+        "title": "How to create a website using HTML and CSS 2",
+        "blogHtml": "this is a test blog post title 2!",
+        "blogCoverPhoto": "beautiful-stories"
+      }
+    ],
+    "sampleBlogCards": [
+      {
+        "blogTitle": "Blog Card #1",
+        "blogCoverPhoto": "stock-1",
+        "blogDate": "May 1, 2023"
+      },
+      {
+        "blogTitle": "Blog Card #2",
+        "blogCoverPhoto": "stock-2",
+        "blogDate": "May 1, 2023"
+      },
+      {
+        "blogTitle": "Blog Card #3",
+        "blogCoverPhoto": "stock-3",
+        "blogDate": "May 1, 2023"
+      },
+      {
+        "blogTitle": "Blog Card #4",
+        "blogCoverPhoto": "stock-4",
+        "blogDate": "May 1, 2023"
+      }
+    ]
+  },
+  "userData": [
+    {
+      "id": 1,
+      "userInfo": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "John@gmail.com",
+        "password": "123456"
+      },
+      "userStatus": {
+        "loggedIn": false,
+        "registered": false,
+        "admin": false
+      }
+    },
+    {
+      "id": 2,
+      "userInfo": {
+        "username": "beidi",
+        "password": "123456",
+        "email": "beidi@gmail.com"
+      },
+      "userStatus": {
+        "loggedIn": false,
+        "registered": false,
+        "admin": false
+      }
+    },
+    {
+      "userInfo": {
+        "username": "chouchou",
+        "password": "123456",
+        "email": "chouchou@gmail.com"
+      },
+      "userStatus": {
+        "loggedIn": true,
+        "registered": true,
+        "admin": false
+      },
+      "id": 787001644
     }
+  ]
 }

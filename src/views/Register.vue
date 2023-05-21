@@ -1,6 +1,6 @@
 <template lang="">
     <div class="form-wrap overflow-hidden flex flex-row h-screen justify-center self-center my-0 mx-auto w-11/12 lg:w-full ">
-        <form class="login py-0 px-3 relative flex flex-col justify-center items-center flex-1 lg:px-12" action="">
+        <form class="login py-0 px-3 relative flex flex-col justify-center items-center flex-1 lg:px-12" @submit.prevent="register">
             <p class="login-register mb-8">
                 已经有账户了吗？
                 <router-link class="router-link border-b-[1px] border-solid border-transparent transition-all duration-500 ease-in-out hover:border-char hover:text-teal" :to="{name : 'Login'}">
@@ -11,18 +11,19 @@
             <div class="inputs w-full max-w-sm">
                 <div class="input flex flex-row justify-center items-center mb-6 space-x-6">
                     <user_alt class="icon w-5" />
-                    <input type="text" placeholder="Username" v-model="userName" class="w-full h-7 border border-solid border-gray-300 shadow-sm rounded-md transition-all duration-500 ease-in-out focus:border-teal outline-none focus:scale-105">
+                    <input type="text" placeholder="Username" v-model.trim="userName" class="w-full h-7 border border-solid border-gray-300 shadow-sm rounded-md transition-all duration-500 ease-in-out focus:border-teal outline-none focus:scale-105">
                 </div>
                 <div class="input flex flex-row justify-center items-center mb-6 space-x-6">
                     <envelop class="icon w-5" />
-                    <input type="email" placeholder="Email" v-model="email" class="w-full h-7 border border-solid border-gray-300 shadow-sm rounded-md transition-all duration-500 ease-in-out focus:border-teal outline-none focus:scale-105">
+                    <input type="email" placeholder="Email" v-model.trim="email" class="w-full h-7 border border-solid border-gray-300 shadow-sm rounded-md transition-all duration-500 ease-in-out focus:border-teal outline-none focus:scale-105">
                 </div>
                 <div class="input flex flex-row justify-center items-center mb-6 space-x-6">
                     <lock_alt class="icon w-5" />
-                    <input type="password" placeholder="Password" v-model="password" class="w-full h-7 border border-solid border-gray-300 shadow-sm rounded-md transition-all duration-500 ease-in-out focus:border-teal outline-none focus:scale-105">
+                    <input type="password" placeholder="Password" v-model.trim="password" class="w-full h-7 border border-solid border-gray-300 shadow-sm rounded-md transition-all duration-500 ease-in-out focus:border-teal outline-none focus:scale-105">
                 </div>
+                <div class="error text-center text-red-600" v-show="errorMessage"> {{ this.errorMessage }} </div>
             </div>
-            <button class="flex flex-row justify-center items-center text-1xl cursor-pointer mt-8 transition-all duration-500 w-32 py-2 px-3 bg-char text-white rounded-full border-none hover:bg-white hover:text-char hover:scale-105 hover:font-bold focus:outline-none" to="#">
+            <button class="flex flex-row justify-center items-center text-1xl cursor-pointer mt-8 transition-all duration-500 w-32 py-2 px-3 bg-char text-white rounded-full border-none hover:bg-white hover:text-char hover:scale-105 hover:font-bold focus:outline-none" type="submit">
                 注册<ArrowRightLight class="arrow arrow-light w-3 ml-4"/>
             </button>
             <div class="angle hidden absolute bg-white rotate-3 w-[65px] -right-[30px] h-full md:block" src=""></div>
@@ -37,10 +38,9 @@ import lock_alt from '../assets/Icons/lock-alt-solid.svg?component'
 import user_alt from '../assets/Icons/user-alt-light.svg?component'
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
 import {userDataStore} from "../store/index.js";
-import axios from 'axios';
 
 export default {
-    name: 'Login',
+    name: 'Register',
     components: {
         envelop,
         lock_alt,
@@ -54,28 +54,45 @@ export default {
             userName: '',
             email: '',
             password: '',
+            errorMessage: null,
         }
     },
     methods: {
-        async register() {
-            const {userName, email, password} = this;
-            if (!userName || !email || !password) {
-                return {
-                    //抛出错误    
-                }
+        validateForm(){
+            const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+            if(this.userName === '' || this.email === '' || this.password === ''){
+                throw new Error('请提供姓名，邮箱和密码');
+            } else if(this.password.length < 6){
+                throw new Error('密码长度至少为6位');
+            } else if(this.userName.length < 3){
+                throw new Error('用户名长度至少为3位');
+            } else if(!regex.test(this.email)){
+                throw new Error('邮箱格式不正确');
             }
-            const {data} = await axios.post('/api/register', {
-                userName,
-                email,
-                password,
-            });
-            if (data.code === 200) {
-                this.userData_Store.setUserData(data.data);
-                this.$router.push({name: 'Home'});
+        },
+        async register(){
+            try{
+                let id = Math.floor(Math.random() * 1000000000);
+                this.validateForm();
+                this.userData_Store.userData.id = id;
+                this.userData_Store.userData.userInfo.username = this.userName;
+                this.userData_Store.userData.userInfo.email = this.email;
+                this.userData_Store.userData.userInfo.password = this.password;
+                this.userData_Store.userData.userStatus.registered = true;
+                this.userData_Store.userData.userStatus.loggedIn = true;
+                this.userData_Store.userData.userStatus.admin = false;
+                await this.userData_Store.register();
+                this.userData_Store.userDataStoreInit(); 
+                const router = this.$router;
+                router.push({name: 'Home'});  
+            } catch (error){
+                this.errorMessage = error.message;
+                console.log(error.message);
             }
         }
-    }
+    },
 }
+
 </script>
 <style scoped>
 .angle {

@@ -1,15 +1,15 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <Navigation v-show="homeViewData_Store.navigationShow"/>
+      <Navigation v-show="postViewData_Store.navigationShow"/>
       <router-view />
-      <Footer v-show="homeViewData_Store.footerShow" />
+      <Footer v-show="postViewData_Store.footerShow" />
     </div>
   </div>
 </template>
 
 <script>
-import {homeViewDataStore} from "./store/index.js";
+import {postViewDataStore} from "./store/index.js";
 import Navigation from './components/Navigation.vue'
 import Footer from './components/Footer.vue';
 
@@ -20,24 +20,24 @@ export default {
     Footer
   },
   data() {
-    const homeViewData_Store = homeViewDataStore();
+    const postViewData_Store = postViewDataStore();
     return {
-        homeViewData_Store
+        postViewData_Store
     }
   },
   methods: {
     checkRoute() {
       if (this.$route.path === '/login' || this.$route.path === '/register' || this.$route.path === '/forgotpassword') {
-        this.homeViewData_Store.navigationShow = false;
-        this.homeViewData_Store.footerShow = false;
+        this.postViewData_Store.navigationShow = false;
+        this.postViewData_Store.footerShow = false;
       } else {
-        this.homeViewData_Store.navigationShow = true;
-        this.homeViewData_Store.footerShow = true;
+        this.postViewData_Store.navigationShow = true;
+        this.postViewData_Store.footerShow = true;
       } 
     }
   },
   async created() {
-    await this.homeViewData_Store.getHomeViewData();
+    await this.postViewData_Store.getpostViewData();
     },
   watch : {
       $route: function() {
