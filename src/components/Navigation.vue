@@ -9,12 +9,12 @@
                     <router-link class="link font-medium text-2xl py-2 px-4 rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/">主页</router-link>
                     <router-link class="link font-medium text-2xl py-2 px-4  rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/blogs">笔记</router-link>
                     <router-link class="link font-medium text-2xl py-2 px-4  rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/newpost">创建笔记</router-link>
-                    <router-link class="link font-medium text-2xl py-2 px-4 rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/login">登录/注册</router-link>
+                    <router-link v-show="loginButtonShow" class="link font-medium text-2xl py-2 px-4 rounded-full hover:bg-teal hover:text-white transition-all duration-500" to="/login">登录/注册</router-link>
                 </ul>
-                <div class="profile relative cursor-pointer flex flex-row justify-center items-center w-10 h-10 rounded-full text-white bg-char" ref="profile">
-                    <span class="pointer-events-none"> {{userData_Store.userData.userInfo.username}} </span>
-                    <div class="profile-menu absolute top-14 right-0 w-72 bg-char shadow-md">
-                        <div class="info flex flex-row items-center p-4 border-b-[1px] border-solid border-white">
+                <div v-show="profileMenuShow" class="profile cursor-pointer relative flex flex-row justify-center items-center w-10 h-10 rounded-full text-white bg-char" ref="profile" @click="toggleProfileMenu">
+                    <span class="pointer-events-none font-light"> {{userData_Store.userData.userInfo.username}} </span>
+                    <div v-show="profileMenuDetailShow" class="profile-menu absolute top-14 right-0 w-72 bg-char shadow-md">
+                        <div class="info flex flex-row items-center p-4 border-b-[1px] border-solid border-white pointer-events-none">
                             <p class="userName w-10 h-10 bg-white text-char flex flex-row justify-center items-center rounded-full"> {{userData_Store.userData.userInfo.username}} </p>
                             <div class="right">
                                 <p class="userRole"> {{userRole}} </p>
@@ -22,19 +22,19 @@
                             </div>
                         </div>
                         <div class="options p-4 flex flex-col justify-center items-start">
-                            <div class="option text-white flex flex-row items-center mb-3">
+                            <div class="option text-white flex flex-row items-center mb-3 cursor-pointer">
                                 <router-link class="option" to="#">
                                     <userIcon class="icon w-4" />
                                 </router-link>
                                 <p class="ml-3">个人信息</p>
                             </div>
-                            <div class="option text-white flex flex-row items-center mb-3">
+                            <div class="option text-white flex flex-row items-center mb-3 cursor-pointer">
                                 <router-link class="option" to="#">
                                     <adminIcon class="icon w-4" />
                                 </router-link>
                                 <p class="ml-3">管理员</p>
                             </div>
-                            <div class="option text-white flex flex-row items-center mb-3">
+                            <div class="option text-white flex flex-row items-center mb-3 cursor-pointer">
                                 <router-link class="option" to="#">
                                     <signOutIcon class="icon w-4" />
                                 </router-link>
@@ -77,6 +77,9 @@ export default {
         return {
             userData_Store,
             mobileNav: false,
+            profileMenuShow: false,
+            profileMenuDetailShow: false,
+            loginButtonShow: true,
             windowWidth: null,
         }
     },
@@ -90,6 +93,17 @@ export default {
             if (this.windowWidth > 768) {
                 this.mobileNav = false
             }
+        },
+        checkLogin() {
+            if (this.userData_Store.userData.userStatus.loggedIn) {
+                this.loginButtonShow = false
+                this.profileMenuShow = true
+            }
+        },
+        toggleProfileMenu(e) {
+            if (e.target === this.$refs.profile) {
+                this.profileMenuDetailShow = !this.profileMenuDetailShow
+            }
         }
     },
     computed: {
@@ -99,11 +113,19 @@ export default {
     },
     created() {
         window.addEventListener('resize', this.closeMobileNav)
+        this.profileMenuDetailShow = false
+        this.checkLogin()
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.closeMobileNav)
-    }
+    },
+    watch: {
+        '$route'() {
+            this.checkLogin()
+        },
+    },
 }
+
 
 </script>
 
@@ -136,5 +158,9 @@ export default {
 
 .option:last-child {
     margin-bottom: 0px;
+}
+
+span {
+    font-size: 8px;
 }
 </style>
