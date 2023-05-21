@@ -81,8 +81,6 @@ const userDataStore = defineStore({
         },
         async login () {
             await this.getallUsers()
-            console.log(this.allUsers)
-            console.log(this.userData.userInfo.email)
             const user = this.allUsers.find(user => this.userData.userInfo.email === user.userInfo.email)
             if (!user) {
                 throw new Error('这个邮箱尚未注册')
@@ -92,7 +90,16 @@ const userDataStore = defineStore({
             this.userData = user
             this.userData.userStatus.loggedIn = true
             this.userData.userStatus.registered = true
-            console.log(this.userData)
+        },
+        async resetPassword () {
+            await this.getallUsers()
+            const user = this.allUsers.find(user => this.userData.userInfo.email === user.userInfo.email)
+            if (!user) {
+                throw new Error('这个邮箱尚未注册')
+            }
+            this.userData = user
+            this.userData.userStatus.loggedIn = false
+            this.userData.userStatus.registered = true
         },
         }
 })  
