@@ -70,5 +70,4 @@ export default {
         color: #111827;
         background-color: #111827;
     }
-
 </style>

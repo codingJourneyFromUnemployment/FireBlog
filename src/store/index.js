@@ -113,4 +113,14 @@ const modalDataStore = defineStore({
     }),
 })
 
-export { postViewDataStore, blogsViewDataStore, userDataStore, modalDataStore }
+const NavViewDataStore = defineStore({
+    id: 'NavViewDataStore',
+    state: () => ({
+        mobileNav: false,
+        profileMenuShow: false,
+        profileMenuDetailShow: false,
+        loginButtonShow: true,
+    }),
+})
+
+export { postViewDataStore, blogsViewDataStore, userDataStore, modalDataStore, NavViewDataStore }

@@ -33,7 +33,7 @@
 import envelop from '../assets/Icons/envelope-regular.svg?component'
 import lock_alt from '../assets/Icons/lock-alt-solid.svg?component'
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
-import {userDataStore} from "../store/index.js";
+import {userDataStore, NavViewDataStore} from "../store/index.js";
 
 export default {
     name: 'Login',
@@ -44,8 +44,10 @@ export default {
     },
     data () {
         const userData_Store = userDataStore();
+        const NavViewData_Store = NavViewDataStore();
         return {
             userData_Store,
+            NavViewData_Store,
             email: '',
             password: '',
             errorMessage: null,
@@ -68,13 +70,14 @@ export default {
                 this.userData_Store.userData.userInfo.email = this.email;
                 this.userData_Store.userData.userInfo.password = this.password;
                 await this.userData_Store.login();
+                this.NavViewData_Store.profileMenuDetailShow = false;
                 this.$router.push({name: 'Blogs'});
             } catch (error){
                 this.errorMessage = error.message;
                 console.log(error.message);
             }
         }
-    }
+    },
 }
 </script>
 <style scoped>
