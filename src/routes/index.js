@@ -5,6 +5,8 @@ import Newpost from "../views/Newpost.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
+import Profile from "../views/Profile.vue";
+import Admin from "../views/Admin.vue";
 
 const Routes = [
   {path: "/", name: "Home", component: Home},
@@ -12,7 +14,9 @@ const Routes = [
   {path: "/newpost", name: "Newpost", component: Newpost},
   {path: "/login", name: "Login", component: Login},
   {path: "/register", name: "Register", component: Register},
-  {path: "/forgotpassword", name: "ForgotPassword", component: ForgotPassword}
+  {path: "/forgotpassword", name: "ForgotPassword", component: ForgotPassword},
+  {path: "/profile", name: "Profile", component: Profile},
+  {path: "/admin", name: "Admin", component: Admin},
 ]
 
 const router = createRouter({

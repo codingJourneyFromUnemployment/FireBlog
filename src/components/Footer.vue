@@ -23,7 +23,7 @@
                     <ul class="flex flex-row h-full space-x-4 md:flex-col items-start md:space-y-4 md:space-x-0">
                         <router-link class="link text-2xl font-medium text-white hover:text-teal transition-all duration-500" :to="{name : 'Home'}">主页</router-link>
                         <router-link class="link text-2xl font-medium text-white hover:text-teal transition-all duration-500" :to="{name : 'Blogs'}">笔记</router-link>
-                        <router-link class="link text-2xl font-medium text-white hover:text-teal transition-all duration-500" :to="{name : 'Login'}">登录/注册</router-link>
+                        <router-link v-show="navViewData_Store.loginButtonShow" class="link text-2xl font-medium text-white hover:text-teal transition-all duration-500" :to="{name : 'Login'}">登录/注册</router-link>
                     </ul>
                 </div>
             </div>
@@ -38,6 +38,7 @@ import youTube from '../assets/Icons/youtube-brands.svg?component'
 import twitter from '../assets/Icons/twitter-brands.svg?component'
 import instagram from '../assets/Icons/instagram-brands.svg?component'
 import linkedin from '../assets/Icons/linkedin-brands.svg?component'
+import {NavViewDataStore} from "../store/index.js";
 
 export default {
     name: 'Footer',
@@ -46,7 +47,13 @@ export default {
         twitter,
         instagram,
         linkedin
-    }
+    },
+    data() {
+        const navViewData_Store = NavViewDataStore();
+        return {
+            navViewData_Store,
+        }
+    },
 }
 </script>
 <style lang="">

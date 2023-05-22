@@ -71,6 +71,7 @@ export default {
                 this.userData_Store.userData.userInfo.password = this.password;
                 await this.userData_Store.login();
                 this.NavViewData_Store.profileMenuDetailShow = false;
+                this.NavViewData_Store.mobileNav = false;
                 this.$router.push({name: 'Blogs'});
             } catch (error){
                 this.errorMessage = error.message;
