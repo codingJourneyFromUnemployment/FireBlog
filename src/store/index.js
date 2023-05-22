@@ -101,7 +101,23 @@ const userDataStore = defineStore({
             this.userData.userStatus.loggedIn = false
             this.userData.userStatus.registered = true
         },
-        }
+        async updateUserProfile (newUserName, newUserEmail) {
+            await this.getallUsers();
+            const user = this.allUsers.find(user => this.userData.userInfo.email === user.userInfo.email)
+            if (newUserName !== '') {
+                user.userInfo.username = newUserName;
+            }
+            if (newUserEmail !== '') {
+                user.userInfo.email = newUserEmail;
+            }
+            try {
+                await axios.put(`http://localhost:5173/api/userData/${user.id}`, user);
+            } catch (err) {
+                throw new Error(err)
+            }
+            this.userData = user
+        },
+    }
 })  
 
 const modalDataStore = defineStore({
