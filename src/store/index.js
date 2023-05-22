@@ -117,6 +117,22 @@ const userDataStore = defineStore({
             }
             this.userData = user
         },
+        async adminAuth (newAdminEmail) {
+            try {
+                await this.getallUsers();
+                const newAdmin = this.allUsers.find(user => newAdminEmail === user.userInfo.email)
+                if (!newAdmin) {
+                    throw new Error('这个邮箱尚未注册')
+                }
+                if (newAdmin.userStatus.admin === true) {
+                    throw new Error('这个用户已经是管理员了')
+                }
+                newAdmin.userStatus.admin = true
+                await axios.put(`http://localhost:5173/api/userData/${newAdmin.id}`, newAdmin);
+            } catch (err) {
+                throw new Error(err)
+            }
+        },
     }
 })  
 
