@@ -64,6 +64,10 @@ const userDataStore = defineStore({
                 }
             }
         },
+        async getallUsers () {
+            const res = await axios.get('http://localhost:5173/api/userData')
+            this.allUsers = res.data
+        },
         async register (userName, userEmail, userPassword) {
             await this.getallUsers() 
             let user = this.allUsers.find(user => userEmail === user.userInfo.email)
@@ -80,10 +84,6 @@ const userDataStore = defineStore({
             user.userStatus.loggedIn = true
             this.userData = user
             await axios.post('http://localhost:5173/api/userData', this.userData);
-        },
-        async getallUsers () {
-            const res = await axios.get('http://localhost:5173/api/userData')
-            this.allUsers = res.data
         },
         async login (userEmail, userPassword) { 
             await this.getallUsers()

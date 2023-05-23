@@ -64,21 +64,21 @@
         "email": "beidi@gmail.com"
       },
       "userStatus": {
-        "loggedIn": true,
-        "registered": false,
+        "loggedIn": false,
+        "registered": true,
         "admin": true
       }
     },
     {
       "userInfo": {
-        "username": "chouchou",
+        "username": "mama",
         "password": "123456",
-        "email": "chouchou@gmail.com"
+        "email": "mama@gmail.com"
       },
       "userStatus": {
-        "loggedIn": true,
+        "loggedIn": false,
         "registered": true,
-        "admin": false
+        "admin": true
       },
       "id": 787001644
     },
@@ -92,7 +92,7 @@
       "userStatus": {
         "loggedIn": false,
         "registered": true,
-        "admin": false
+        "admin": true
       }
     }
   ]

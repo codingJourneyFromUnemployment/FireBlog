@@ -50,9 +50,9 @@
                 <router-link class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/blogs">笔记</router-link>
                 <router-link class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">创建笔记</router-link>
                 <router-link v-show="navViewData_Store.loginButtonShow" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/login">登陆/注册</router-link>
-                <router-link v-show="profileMenuShow" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/profile">用户信息</router-link>
-                <router-link v-show="profileMenuShow && userData_Store.userData.userStatus.admin" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/admin">管理员</router-link>
-                <div v-show="profileMenuShow" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" @click="signOut">退出登陆</div>
+                <router-link v-show="navViewData_Store.profileMenuShow" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/profile">用户信息</router-link>
+                <router-link v-show="navViewData_Store.profileMenuShow && userData_Store.userData.userStatus.admin" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/admin">管理员</router-link>
+                <div v-show="navViewData_Store.profileMenuShow" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" @click="signOut">退出登陆</div>
             </ul>
         </transition>
     </header>
