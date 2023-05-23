@@ -28,7 +28,7 @@
                                 </div>
                                 <p class="ml-3">个人信息</p>
                             </router-link>
-                            <router-link :to="{name :'Admin'}" class="option text-white flex flex-row items-center mb-3 cursor-pointer">
+                            <router-link :to="{name :'Admin'}" class="option text-white flex flex-row items-center mb-3 cursor-pointer" v-show="userData_Store.userData.userStatus.admin">
                                 <div class="option">
                                     <adminIcon class="icon w-4" />
                                 </div>
@@ -50,6 +50,9 @@
                 <router-link class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/blogs">笔记</router-link>
                 <router-link class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="#">创建笔记</router-link>
                 <router-link v-show="navViewData_Store.loginButtonShow" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/login">登陆/注册</router-link>
+                <router-link v-show="profileMenuShow" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/profile">用户信息</router-link>
+                <router-link v-show="profileMenuShow && userData_Store.userData.userStatus.admin" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" to="/admin">管理员</router-link>
+                <div v-show="profileMenuShow" class="link text-white py-2 pl-3 text-2xl font-medium rounded-l-full hover:bg-teal transition-colors duration-300" @click="signOut">退出登陆</div>
             </ul>
         </transition>
     </header>
@@ -104,10 +107,13 @@ export default {
                 this.navViewData_Store.profileMenuDetailShow = !this.navViewData_Store.profileMenuDetailShow
             }
         },
-        signOut() {
-            this.userData_Store.userData.userStatus.loggedIn = false
-            this.userData_Store.userData.userStatus.admin = false
-            this.userData_Store.userData.userInfo = {}
+        async signOut() {
+            try {
+                await this.userData_Store.logout()
+                this.userData_Store.userDataStoreInit()
+            } catch (error) {
+                console.log(error.message)
+            }
             this.checkLogin()
             this.$router.push('/')
         }

@@ -1,4 +1,6 @@
 <template lang="">
+    <Modal v-show="modalData_Store.modalShow" />
+    <loading v-show="modalData_Store.loadingShow" />
     <div class="form-wrap overflow-hidden flex flex-row h-screen justify-center self-center my-0 mx-auto w-11/12 lg:w-full ">
         <form class="login py-0 px-3 relative flex flex-col justify-center items-center flex-1 lg:px-12" @submit.prevent="register">
             <p class="login-register mb-8">
@@ -33,11 +35,13 @@
 </template>
 
 <script>
+import Modal from "../components/Modal.vue";
+import loading from '../components/Loading.vue';
 import envelop from '../assets/Icons/envelope-regular.svg?component'
 import lock_alt from '../assets/Icons/lock-alt-solid.svg?component'
 import user_alt from '../assets/Icons/user-alt-light.svg?component'
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
-import {userDataStore} from "../store/index.js";
+import {userDataStore, modalDataStore} from "../store/index.js";
 
 export default {
     name: 'Register',
@@ -46,11 +50,15 @@ export default {
         lock_alt,
         ArrowRightLight,
         user_alt,
+        Modal,
+        loading,
     },
     data () {
         const userData_Store = userDataStore();
+        const modalData_Store = modalDataStore();
         return {
             userData_Store,
+            modalData_Store,
             userName: '',
             email: '',
             password: '',
@@ -72,22 +80,15 @@ export default {
         },
         async register(){
             try{
-                let id = Math.floor(Math.random() * 1000000000);
                 this.validateForm();
-                this.userData_Store.userData.id = id;
-                this.userData_Store.userData.userInfo.username = this.userName;
-                this.userData_Store.userData.userInfo.email = this.email;
-                this.userData_Store.userData.userInfo.password = this.password;
-                this.userData_Store.userData.userStatus.registered = true;
-                this.userData_Store.userData.userStatus.loggedIn = true;
-                this.userData_Store.userData.userStatus.admin = false;
-                await this.userData_Store.register();
-                this.userData_Store.userDataStoreInit(); 
+                this.modalData_Store.loadingShow = true;
+                await this.userData_Store.register(this.userName, this.email, this.password);
+                this.modalData_Store.loadingShow = false;
                 const router = this.$router;
                 router.push({name: 'Home'});  
             } catch (error){
                 this.errorMessage = error.message;
-                console.log(error.message);
+                this.modalData_Store.loadingShow = false;
             }
         }
     },

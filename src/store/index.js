@@ -64,32 +64,43 @@ const userDataStore = defineStore({
                 }
             }
         },
-        async register () {
-            try {
-                await axios.post('http://localhost:5173/api/userData', this.userData)
-            } catch (err) {
-                console.log(err)
+        async register (userName, userEmail, userPassword) {
+            await this.getallUsers() 
+            let user = this.allUsers.find(user => userEmail === user.userInfo.email)
+            if (user) {
+                throw new Error('这个邮箱已经注册过了')
             }
+            let id = Math.floor(Math.random() * 1000000000);
+            user = this.userData
+            user.id = id
+            user.userInfo.username = userName
+            user.userInfo.email = userEmail
+            user.userInfo.password = userPassword
+            user.userStatus.registered = true
+            user.userStatus.loggedIn = true
+            this.userData = user
+            await axios.post('http://localhost:5173/api/userData', this.userData);
         },
         async getallUsers () {
-            try {
-                const res = await axios.get('http://localhost:5173/api/userData')
-                this.allUsers = res.data
-            } catch (err) {
-                console.log(err)
-            }
+            const res = await axios.get('http://localhost:5173/api/userData')
+            this.allUsers = res.data
         },
-        async login () {
+        async login (userEmail, userPassword) { 
             await this.getallUsers()
-            const user = this.allUsers.find(user => this.userData.userInfo.email === user.userInfo.email)
+            const user = this.allUsers.find(user => userEmail === user.userInfo.email)
             if (!user) {
                 throw new Error('这个邮箱尚未注册')
-            } else if (this.userData.userInfo.password !== user.userInfo.password) { 
+            } else if (userPassword !== user.userInfo.password) {
                 throw new Error('密码错误')
             }
+            user.userStatus.loggedIn = true
             this.userData = user
-            this.userData.userStatus.loggedIn = true
-            this.userData.userStatus.registered = true
+            await axios.put(`http://localhost:5173/api/userData/${user.id}`, user);
+        },
+        async logout () {
+            const user = this.userData
+            user.userStatus.loggedIn = false
+            await axios.put(`http://localhost:5173/api/userData/${user.id}`, user);
         },
         async resetPassword () {
             await this.getallUsers()
@@ -97,9 +108,9 @@ const userDataStore = defineStore({
             if (!user) {
                 throw new Error('这个邮箱尚未注册')
             }
-            this.userData = user
             this.userData.userStatus.loggedIn = false
             this.userData.userStatus.registered = true
+            this.userData = user
         },
         async updateUserProfile (newUserName, newUserEmail) {
             await this.getallUsers();
@@ -110,28 +121,20 @@ const userDataStore = defineStore({
             if (newUserEmail !== '') {
                 user.userInfo.email = newUserEmail;
             }
-            try {
-                await axios.put(`http://localhost:5173/api/userData/${user.id}`, user);
-            } catch (err) {
-                throw new Error(err)
-            }
+            await axios.put(`http://localhost:5173/api/userData/${user.id}`, user);
             this.userData = user
         },
         async adminAuth (newAdminEmail) {
-            try {
-                await this.getallUsers();
-                const newAdmin = this.allUsers.find(user => newAdminEmail === user.userInfo.email)
-                if (!newAdmin) {
-                    throw new Error('这个邮箱尚未注册')
-                }
-                if (newAdmin.userStatus.admin === true) {
-                    throw new Error('这个用户已经是管理员了')
-                }
-                newAdmin.userStatus.admin = true
-                await axios.put(`http://localhost:5173/api/userData/${newAdmin.id}`, newAdmin);
-            } catch (err) {
-                throw new Error(err)
+            await this.getallUsers();
+            const newAdmin = this.allUsers.find(user => newAdminEmail === user.userInfo.email)
+            if (!newAdmin) {
+                throw new Error('这个邮箱尚未注册')
             }
+            if (newAdmin.userStatus.admin === true) {
+                throw new Error('这个用户已经是管理员了')
+            }
+            newAdmin.userStatus.admin = true
+            await axios.put(`http://localhost:5173/api/userData/${newAdmin.id}`, newAdmin);
         },
     }
 })  

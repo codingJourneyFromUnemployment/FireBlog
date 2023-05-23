@@ -9,7 +9,10 @@
                     新增管理员
                 </div>
                 <div class="input my-4 min-w-[300px] flex justify-center">
-                    <input class="w-full h-7 border border-solid border-gray-300 shadow-sm rounded-md transition-all duration-500 ease-in-out focus:border-teal outline-none focus:scale-105" type="email" id="userName" v-model.trim="newAdminEmail" placeholder="输入新管理员邮箱">
+                    <input class="w-full h-7 border border-solid border-gray-300 shadow-sm rounded-md transition-all duration-500 ease-in-out focus:border-teal outline-none focus:scale-105" type="email" id="userName" v-model.trim="newAdminEmail" placeholder="输入要新增的管理员邮箱">
+                </div>
+                <div class="error text-center text-red-600 my-4" v-show="errorMessage"> 
+                    {{ this.errorMessage }} 
                 </div>
                 <button class="flex flex-row justify-center items-center text-1xl cursor-pointer mt-8 transition-all duration-500 w-24 py-2 px-2 bg-char text-white rounded-full border-none hover:bg-white hover:text-char hover:scale-105 hover:font-bold focus:outline-none" type="submit" @click="adminAuth">
                     保存<ArrowRightLight class="arrow arrow-light w-3 ml-4"/>
@@ -46,15 +49,26 @@ export default {
             if(this.newAdminEmail === ''){
                 throw new Error('请提供需要授予管理员权限的用户邮箱');
             };
-            if(this.newEmail){
-                if(!regex.test(this.newEmail)){
-                    console.log(this.newUserName, this.newEmail);
+            if(this.newAdminEmail){
+                if(!regex.test(this.newAdminEmail)){
                     throw new Error('邮箱格式不正确');
                 }
             };
         },
         async adminAuth(){
-            
+            try {
+                this.validateForm();
+                this.modalData_Store.loadingShow = true;
+                await this.userData_Store.adminAuth(this.newAdminEmail);
+                this.modalData_Store.loadingShow = false;
+                this.modalData_Store.message = '新增管理员成功';
+                this.modalData_Store.modalShow = true;
+                this.newAdminEmail = '';
+                this.errorMessage = null;
+            } catch (error) {
+                this.modalData_Store.loadingShow = false;
+                this.errorMessage = error.message;
+            }
         }
     }
 }

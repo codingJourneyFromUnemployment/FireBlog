@@ -64,7 +64,7 @@
         "email": "beidi@gmail.com"
       },
       "userStatus": {
-        "loggedIn": false,
+        "loggedIn": true,
         "registered": false,
         "admin": true
       }
@@ -81,6 +81,19 @@
         "admin": false
       },
       "id": 787001644
+    },
+    {
+      "id": 389388925,
+      "userInfo": {
+        "username": "baba",
+        "password": "123456",
+        "email": "baba@gmail.com"
+      },
+      "userStatus": {
+        "loggedIn": false,
+        "registered": true,
+        "admin": false
+      }
     }
   ]
 }

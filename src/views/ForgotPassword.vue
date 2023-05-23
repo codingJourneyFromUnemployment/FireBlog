@@ -59,7 +59,6 @@ export default {
         async resetPassword(){
             try {
                 this.validateForm();
-                this.userData_Store.userData.userInfo.email = this.email;
                 this.modalData_Store.loadingShow = true;
                 await this.userData_Store.resetPassword ();
                 this.modalData_Store.loadingShow = false;

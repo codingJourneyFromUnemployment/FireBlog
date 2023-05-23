@@ -1,4 +1,6 @@
 <template lang="">
+    <Modal v-show="modalData_Store.modalShow" />
+    <loading v-show="modalData_Store.loadingShow" />
     <div class="form-wrap overflow-hidden flex flex-row h-screen justify-center self-center my-0 mx-auto w-11/12 lg:w-full ">
         <form class="login py-0 px-3 relative flex flex-col justify-center items-center flex-1 lg:px-12" @submit.prevent="login">
             <p class="login-register mb-8">
@@ -30,10 +32,12 @@
     </div>
 </template>
 <script>
+import Modal from "../components/Modal.vue";
+import loading from '../components/Loading.vue';
 import envelop from '../assets/Icons/envelope-regular.svg?component'
 import lock_alt from '../assets/Icons/lock-alt-solid.svg?component'
 import ArrowRightLight from '../assets/Icons/arrow-right-light.svg?component';
-import {userDataStore, NavViewDataStore} from "../store/index.js";
+import {userDataStore, NavViewDataStore, modalDataStore} from "../store/index.js";
 
 export default {
     name: 'Login',
@@ -41,12 +45,16 @@ export default {
         envelop,
         lock_alt,
         ArrowRightLight,
+        Modal,
+        loading,
     },
     data () {
         const userData_Store = userDataStore();
         const NavViewData_Store = NavViewDataStore();
+        const modalData_Store = modalDataStore();
         return {
             userData_Store,
+            modalData_Store,
             NavViewData_Store,
             email: '',
             password: '',
@@ -67,15 +75,15 @@ export default {
         async login(){
             try{
                 this.validateForm();
-                this.userData_Store.userData.userInfo.email = this.email;
-                this.userData_Store.userData.userInfo.password = this.password;
-                await this.userData_Store.login();
+                this.modalData_Store.loadingShow = true;
+                await this.userData_Store.login(this.email, this.password);
+                this.modalData_Store.loadingShow = false;
                 this.NavViewData_Store.profileMenuDetailShow = false;
                 this.NavViewData_Store.mobileNav = false;
                 this.$router.push({name: 'Blogs'});
             } catch (error){
                 this.errorMessage = error.message;
-                console.log(error.message);
+                this.modalData_Store.loadingShow = false;
             }
         }
     },

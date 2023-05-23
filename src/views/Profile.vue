@@ -88,6 +88,9 @@ export default {
                 this.modalData_Store.loadingShow = false;
                 this.modalData_Store.message = '用户信息修改成功';
                 this.modalData_Store.modalShow = true;
+                this.errorMessage = null;
+                this.newUserName = '';
+                this.newEmail = '';
             } catch (error) {
                 this.modalData_Store.loadingShow = false;
                 this.errorMessage = error.message;
