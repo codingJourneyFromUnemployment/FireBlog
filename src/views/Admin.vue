@@ -48,12 +48,12 @@ export default {
             const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
             if(this.newAdminEmail === ''){
                 throw new Error('请提供需要授予管理员权限的用户邮箱');
-            };
+            }
             if(this.newAdminEmail){
                 if(!regex.test(this.newAdminEmail)){
                     throw new Error('邮箱格式不正确');
                 }
-            };
+            }
         },
         async adminAuth(){
             try {

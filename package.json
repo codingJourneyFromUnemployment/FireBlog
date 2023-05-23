@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "json-server": "json-server --watch db.json --port 5000"
+    "json-server": "json-server --watch db.json --port 5000",
+    "lint": "eslint --ext .js,.vue --fix src"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-vue": "^5.1.0",

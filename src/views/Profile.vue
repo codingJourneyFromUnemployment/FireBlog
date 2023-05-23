@@ -62,23 +62,23 @@ export default {
             if(this.newUserName === '' && this.newEmail === ''){
                 console.log(this.newUserName, this.newEmail);
                 throw new Error('请提供需要修改的用户名或邮箱');
-            };
+            }
             if(this.newUserName === this.userData_Store.userData.userInfo.username || this.newEmail === this.userData_Store.userData.userInfo.email){
                 console.log(this.newUserName, this.newEmail);
                 throw new Error('不能用原用户名或邮箱进行修改');
-            };
+            }
             if(this.newUserName){
                 if(this.newUserName.length < 3){
                     console.log(this.newUserName, this.newEmail);
                     throw new Error('用户名长度至少为3位');
                 }
-            };
+            }
             if(this.newEmail){
                 if(!regex.test(this.newEmail)){
                     console.log(this.newUserName, this.newEmail);
                     throw new Error('邮箱格式不正确');
                 }
-            };
+            }
         },
         async updateUserProfile(){
             try {

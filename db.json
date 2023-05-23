@@ -39,6 +39,16 @@
         "blogCoverPhoto": "stock-4",
         "blogDate": "May 1, 2023"
       }
+    ],
+    "userPosts": [
+      {
+        "blogHtml": "this is a test blog post title 1!",
+        "blogTitle": "",
+        "blogPhotoName": "",
+        "blogPhotoFileURL": null,
+        "blogPhotoPreview": false,
+        "postEdit": false
+      }
     ]
   },
   "userData": [
@@ -92,7 +102,7 @@
       "userStatus": {
         "loggedIn": false,
         "registered": true,
-        "admin": true
+        "admin": false
       }
     }
   ]

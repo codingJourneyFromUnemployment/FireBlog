@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import {postViewDataStore, userDataStore} from "./store/index.js";
+import {postViewDataStore} from "./store/index.js";
 import Navigation from './components/Navigation.vue'
 import Footer from './components/Footer.vue';
 

@@ -2,7 +2,7 @@
     <div class="blog-card-wrap py-20 px-4 md:py-24 bg-slate-100">
         <div class="blog-card container">
             <div class="blog-cards relative grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                <div class="toggle-edit flex flex-row items-center absolute -top-20 right-0 mt-6">
+                <div v-show="userData_Store.userData.userStatus.loggedIn" class="toggle-edit flex flex-row items-center absolute -top-20 right-0 mt-6">
                     <span class="mr-4">打开编辑功能</span>
                     <input type="checkbox" v-model="blogsViewData_Store.editPost">
                 </div>
@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-import {postViewDataStore, blogsViewDataStore} from "../store/index.js";
+import {postViewDataStore, blogsViewDataStore, userDataStore} from "../store/index.js";
 import BlogCard from "../components/BlogCard.vue";
 
 export default {
@@ -23,7 +23,9 @@ export default {
     data() {
         const postViewData_Store = postViewDataStore();
         const blogsViewData_Store = blogsViewDataStore();
+        const userData_Store = userDataStore();
         return {
+            userData_Store,
             postViewData_Store,
             blogsViewData_Store,
         }

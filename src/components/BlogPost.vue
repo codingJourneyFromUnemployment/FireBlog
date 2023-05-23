@@ -10,8 +10,9 @@
                 <p v-else class="content-preview text-2xl max-h-6 w-64 font-light leading-7 whitespace-nowrap overflow-hidden text-ellipsis">
                     {{ post.blogHtml }}
                 </p>
-                <router-link class="link link-light flex flex-row items-center mt-8 pb-1 hover:text-teal transition-all duration-500" v-if="post.welcomeScreen" to="#">
-                    登陆/注册<ArrowRightLight class="arrow arrow-light h-3 ml-2" />
+                <router-link class="link link-light flex flex-row items-center mt-8 pb-1 hover:text-teal transition-all duration-500" v-if="post.welcomeScreen" to="/login">
+                    登陆/注册
+                    <ArrowRightLight class="arrow arrow-light h-3 ml-2" />
                 </router-link>
                 <router-link v-else to="#" class="link flex flex-row items-center mt-8 pb-1 hover:text-teal transition-all duration-500">
                     查看详情<ArrowRightLight class="arrow arrow-light h-3 ml-2" />
