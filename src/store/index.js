@@ -9,6 +9,15 @@ const postViewDataStore = defineStore({
             blogPosts: [],
             navigationShow: true,
             footerShow: true,
+        },
+        userPostData: {
+            id: null,
+            blogHtml: "",
+            blogTitle: "",
+            blogPhotoName: "",
+            blogPhotoFileURL: null,
+            blogPhotoPreview: false,
+            postEdit: false
         }
     }),
     actions: {

@@ -42,7 +42,8 @@
     ],
     "userPosts": [
       {
-        "blogHtml": "this is a test blog post title 1!",
+        "id": 1,
+        "blogHtml": "",
         "blogTitle": "",
         "blogPhotoName": "",
         "blogPhotoFileURL": null,
