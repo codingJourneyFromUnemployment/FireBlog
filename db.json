@@ -100,7 +100,7 @@
         "email": "baba@gmail.com"
       },
       "userStatus": {
-        "loggedIn": false,
+        "loggedIn": true,
         "registered": true,
         "admin": false
       }
