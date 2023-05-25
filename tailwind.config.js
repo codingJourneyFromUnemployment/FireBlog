@@ -31,7 +31,10 @@ export default {
             borderColor:['focus', 'focus-visible'],
             display: {
                 'initial': 'initial',
-            }
+            },
+            height: {
+                '60vh': '60vh',
+            },
         }
     },
     plugins: [

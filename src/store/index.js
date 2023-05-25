@@ -15,7 +15,7 @@ const postViewDataStore = defineStore({
             blogHtml: "",
             blogTitle: "",
             blogPhotoName: "",
-            blogPhotoFileURL: null,
+            blogPhotoFileURL: "www.baidu.com",
             blogPhotoPreview: false,
             postEdit: false
         }
