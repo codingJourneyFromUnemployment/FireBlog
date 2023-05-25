@@ -11,13 +11,26 @@
                     <input type="file" class="blog-photo" ref="blogPhoto" id="blog-photo" accept=".png, .jpg, .jpeg"/>
                 </div>
                 <div class="photo-preview flex flex-row justify-start items-end" v-show="postViewData_Store.userPostData.blogPhotoFileURL">
-                    <button class="preview text-center text-sm cursor-pointer transition-all duration-500 w-32 py-1 px-1 bg-gray-400 text-white rounded-full border-none hover:bg-white hover:text-char hover:scale-105 hover:font-bold focus:outline-none">预览图片</button>
+                    <button class="preview text-center text-sm cursor-pointer transition-all duration-500 w-32 py-1 px-1 bg-gray-400 text-white rounded-full border-none hover:bg-white hover:text-char focus:outline-none">预览图片</button>
                     <span class="font-semibold texl-base ml-4">选择的文件：{{ postViewData_Store.userPostData.blogPhotoName }}</span>
                 </div>
             </div>
-            <div class="editor h-60vh flex flex-col">
+            <div class="editor h-100vh flex flex-col">
                 <div class="warpper h-full overflow-scroll p-0 border-solid border border-gray-300 shadow-md">
-                    <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                    <Toolbar
+                        class="border border-solid border-b border-gray-300"
+                        style="border-bottom: 1px solid #ccc"
+                        :editor="editorRef"
+                        :defaultConfig="toolbarConfig"
+                        :mode="mode"
+                    />
+                    <Editor
+                        class="h-2/3 overflow-y-hidden min-h-[600px]"
+                        v-model="valueHtml"
+                        :defaultConfig="editorConfig"
+                        :mode="mode"
+                        @onCreated="handleCreated"
+                    />
                 </div>
             </div>
             <div class="blog-actions mt-8">
@@ -29,8 +42,10 @@
 
 </template>
 <script>
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import CKEditor from '@ckeditor/ckeditor5-vue';
+import '@wangeditor/editor/dist/css/style.css' 
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+
+
 import Modal from "../components/Modal.vue";
 import loading from '../components/Loading.vue';
 import {postViewDataStore, modalDataStore} from '../store/index.js'
@@ -38,9 +53,10 @@ import {postViewDataStore, modalDataStore} from '../store/index.js'
 export default {
     name: 'CreatePost',
     components: {
-        ckeditor: CKEditor.component,
         Modal,
         loading,
+        Editor,
+        Toolbar
     },
     data() {
         const postViewData_Store = postViewDataStore();
@@ -49,12 +65,22 @@ export default {
             postViewData_Store,
             modalData_Store,
             error : null,
-            editor : ClassicEditor,
-            editorData: '<p>开始输入笔记</p>',
-            editorConfig: {
-                // The configuration of the editor.
-            }
+            editorRef: null,
+            valueHtml: '<p>请输入内容...</p>',
+            mode: 'default', 
+            toolbarConfig: {},
+            editorConfig: { placeholder: '请输入内容...' },
         }
+    },
+    beforeDestroy() {
+        if (this.editorRef != null) {
+            this.editorRef.destroy()
+        }
+    },
+    methods: {
+        handleCreated(editor) {
+            this.editorRef = editor
+        },
     }
 }
 </script>
@@ -82,7 +108,5 @@ export default {
     input[type="file"]::-webkit-file-upload-button:hover {
         background: #fff;
         color: #303030;
-        font-weight: bold;
-        scale: 1.05;
     }
 </style>
