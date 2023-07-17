@@ -82,9 +82,9 @@
     },
     {
       "userInfo": {
-        "username": "mama",
+        "username": "chouchou",
         "password": "123456",
-        "email": "mama@gmail.com"
+        "email": "chouchou@gmail.com"
       },
       "userStatus": {
         "loggedIn": false,
